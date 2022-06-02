@@ -8,7 +8,7 @@
 
 
 ### TODO:
-* Refactor application index.html, app.js, styles.css
+* Refactor application index.html, app.js, styles.css, convert to arrow functions.
 * Style page.
 * Initialize Node project.
 * Write unit and integration tests (Jest).
