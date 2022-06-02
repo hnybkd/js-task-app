@@ -16,22 +16,35 @@
 
     <script>
       // Model - all code that saves and manages data.
+        // If localStorage has a todos array, use it.
+        // Else use default array.
+      let todos;
 
-      let todos = [{
-        title: 'Get groceries',
-        dueDate: '2022-04-10',
-        id: 'id1'
-      }, 
-      {
-        title: 'Wash car',
-        dueDate: '2022-10-14',
-        id: 'id2'
-      },
-      {
-        title: 'Make dinner',
-        dueDate: "2022-06-07",
-        id: 'id3'
-      }];
+      // Retrieve localStorage
+      // JSON.parse converts a string to an array or object.
+      const savedTodos = JSON.parse(localStorage.getItem('todos'));
+      // Check if it is an array.
+      if (Array.isArray(savedTodos)) {
+        todos = savedTodos;
+
+      } else {
+        todos = [{
+          title: 'Get groceries',
+          dueDate: '2022-04-10',
+          id: 'id1'
+        }, 
+        {
+          title: 'Wash car',
+          dueDate: '2022-10-14',
+          id: 'id2'
+        },
+        {
+          title: 'Make dinner',
+          dueDate: "2022-06-07",
+          id: 'id3'
+        }];
+
+      }
 
       // Create a todo
       function createTodo(title, dueDate) {
@@ -44,6 +57,8 @@
           id: id
         });
 
+        saveTodos();
+
       }
       // Delete a todo 
       function removeTodo(idToDelete) {
@@ -55,6 +70,13 @@
           }
 
         });
+
+        saveTodos();
+      }
+
+      function saveTodos() {
+        // Local storage only accepts a string so JSON.stringify converts our array into a string.
+        localStorage.setItem('todos', JSON.stringify(todos));
       }
 
       render();
